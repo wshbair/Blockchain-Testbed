@@ -3,10 +3,16 @@ Steps to login in G5K
 1. ssh account@access.grid5000.fr
 2. Connect to a selected site, such as luxmbourg
 3. Reserve a node : oarsub -I -l nodes=1,walltime=1:45 -t deploy
-4. Deploy the OS : kadeploy3 -f $OAR_NODE_FILE -e jessie-x64-base -k
+4. Deploy the OS :  kadeploy3 -f $OAR_NODE_FILE -e ubuntu1404-x64-min -k
 5. Connent to the node root@NODENAME
 6. Start the blockchain installation
+    apt-get -y install python-software-properties
+    apt-get install -y software-properties-common
+    add-apt-repository -y ppa:ethereum/ethereum
+    apt-get update
+    apt-get install -y ethereum
 
-We need to use the Ruby-Cute to autimate all nodes reservation and deplyment 
+
+**** We need to use the Ruby-Cute to autimate all nodes reservation and deplyment 
 
 
