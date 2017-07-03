@@ -1,0 +1,9 @@
+The steps to build a private blockchain
+----------------------------------------------------------------------------------
+1. Install the ethereum in each node
+2. All node must have identifical Genesis file (e.g.CommonGenesis.json)
+3. The static node id should be given to each node to build the network.
+4. Create account on each node.
+5. Each node should run for mining for a while.
+6. Each node should see the root static node. 
+7. We need to run some node in mining mode to serve the blockchain
