@@ -10,5 +10,6 @@ sudo apt-get install -y ethereum
 
 init.sh
 GenerateStaticNode.sh
+console.sh
 
 
