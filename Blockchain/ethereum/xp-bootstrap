@@ -48,7 +48,6 @@ puts "Running on: #{nodes.join(' ')}"
 
 # deploying all nodes, waiting for the end of deployment
 g5k.deploy(job,  :env => G5K_ENV, :wait => true)
-
 raise "Deployment ended with error" if ((job['deploy'].last['status'] == 'error') or (not job['deploy'].last['result'].to_a.all? { |e| e[1]['state'] == 'OK' }))
 
 #Blockchain installation commands
