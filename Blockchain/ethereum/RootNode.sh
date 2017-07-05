@@ -8,8 +8,8 @@ sudo add-apt-repository -y ppa:ethereum/ethereum
 sudo apt-get update
 sudo apt-get install -y ethereum
 
-init.sh
-GenerateStaticNode.sh
-console.sh
+sh ./init.sh
+sh ./GenerateStaticNode.sh
+sh ./console.sh
 
 
