@@ -9,4 +9,6 @@ sudo apt-get update
 sudo apt-get install -y ethereum
 
 init.sh
+GenerateStaticNode.sh
+
 
