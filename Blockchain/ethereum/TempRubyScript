@@ -10,7 +10,8 @@ ssh = Net::SSH::Multi::Session::new
 @hostname = "granduc-5.luxembourg.grid5000.fr"
 @username = "root"
 @password = ""
-@cmd = "wget https://raw.githubusercontent.com/snt-sedan/Blockchain-Testbed/master/Blockchain/ethereum/GenerateStaticNo$@cmd2= "chmod u+x GenerateStaticNode.sh"
+@cmd = "wget https://raw.githubusercontent.com/snt-sedan/Blockchain-Testbed/master/Blockchain/ethereum/GenerateStaticNode.sh"
+@cmd2= "chmod u+x GenerateStaticNode.sh"
 @cmd3= "./GenerateStaticNode.sh"
 
  begin
