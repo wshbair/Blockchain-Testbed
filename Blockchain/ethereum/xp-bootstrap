@@ -1,4 +1,4 @@
-
+#GRID5000 stuff
 #!/usr/bin/ruby -w
 
 # This script, to be executed on a frontend, automates the initial setup
