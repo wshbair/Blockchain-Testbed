@@ -1,3 +1,4 @@
+#GRID5000 stuff
 for host in `cat REMOTEHOST`; do
  remotenodes=`ssh washbair@$host 'cat nodes.txt'`
  for node in $remotenodes; do
