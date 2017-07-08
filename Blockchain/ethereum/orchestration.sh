@@ -1,4 +1,4 @@
-
+#GRID5000 stuff
 # Send reservation for remote nodes
 for host in `cat REMOTEHOST`; do
  #Copy reservation script to remote node
