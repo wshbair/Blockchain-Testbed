@@ -1,17 +1,25 @@
 require 'cute'
 g5k = Cute::G5K::API.new()
-job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '00:30:00', :env => 'ubuntu1404-x64-min')
+job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '00:30:00', :wait => false)
 Luxnodes = job1["assigned_nodes"]
-job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '00:30:00', :env => 'ubuntu1404-x64-min')
+job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '00:30:00', :wait => false)
 Nancynodes = job2["assigned_nodes"]
-job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :env => 'ubuntu1404-x64-min')
+job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :wait => false)
 Lillenodes = job3["assigned_nodes"]
 
 nodes= Luxnodes+Nancynodes+Lillenodes
+puts "# Nodes are reserved"
 puts nodes
 
-cmd= "git clone https://github.com/snt-sedan/Blockchain-Testbed.git"
-cmd1= "chmod u+x Blockchain-Testbed/Blockchain/ethereum/*.sh"
+STDERR.reopen(STDOUT)
+STDOUT.sync = true
+
+g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "LUXMBOURG NODES READY :)"
+g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "Nancy NODES READY :)"
+g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "LILLE NODES READY :)"
 
 puts "Running commands"
 # Run a command on each node and analyze result
@@ -19,8 +27,8 @@ ssh = Net::SSH::Multi::Session::new
 nodes.each { |n| ssh.use "root@#{n}" }
  ssh.exec!("sudo apt-get update")
  ssh.exec!("sudo apt-get install -y git")
- ssh.exec!(cmd) #Download needed software
- ssh.exec!(cmd1) #make the script executable
+ ssh.exec!("git clone https://github.com/snt-sedan/Blockchain-Testbed.git") #Download needed software
+ ssh.exec!("chmod u+x Blockchain-Testbed/Blockchain/ethereum/*.sh") #make the script executable
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/install.sh")
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/init.sh")#creat a user and run Gensis command
 
