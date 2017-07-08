@@ -7,6 +7,21 @@ Nancynodes = job2["assigned_nodes"]
 job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :env => 'ubuntu1404-x64-min')
 Lillenodes = job3["assigned_nodes"]
 
-puts Luxnodes
-puts Nancynodes
-puts Lillenodes
+nodes= Luxnodes+Nancynodes+Lillenodes
+puts nodes
+
+cmd= "git clone https://github.com/snt-sedan/Blockchain-Testbed.git"
+cmd1= "chmod u+x Blockchain-Testbed/Blockchain/ethereum/*.sh"
+
+puts "Running commands"
+# Run a command on each node and analyze result
+ssh = Net::SSH::Multi::Session::new
+nodes.each { |n| ssh.use "root@#{n}" }
+ ssh.exec!("sudo apt-get update")
+ ssh.exec!("sudo apt-get install -y git")
+ ssh.exec!(cmd) #Download needed software
+ ssh.exec!(cmd1) #make the script executable
+ ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/install.sh")
+ ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/init.sh")#creat a user and run Gensis command
+
+puts "Experiment preparation finished."
