@@ -21,9 +21,10 @@ g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "Nancy NODES READY :)"
 g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "LILLE NODES READY :)"
-
+output = File.open( "static-nodes.json","w" )
+nodeslink=[]
 puts "Running commands"
-# Run a command on each node and analyze result
+ 
 ssh = Net::SSH::Multi::Session::new
 nodes.each { |n| ssh.use "root@#{n}" }
  ssh.exec!("sudo apt-get update")
@@ -32,5 +33,9 @@ nodes.each { |n| ssh.use "root@#{n}" }
  ssh.exec!("chmod u+x Blockchain-Testbed/Blockchain/ethereum/*.sh") #make the script executable
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/install.sh")
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/init.sh")#creat a user and run Gensis command
+ res=ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh")
+ nodeslink.push(res)
+
+output<<'['+nodeslink.join(',')+']'
 
 puts "Experiment preparation finished."
