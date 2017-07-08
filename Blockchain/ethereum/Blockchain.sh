@@ -1,18 +1,16 @@
-
-for host in 'cat REMOTEHOST'; do
+for host in `cat REMOTEHOST`; do
  remotenodes=`ssh washbair@$host 'cat nodes.txt'`
  for node in $remotenodes; do
-  echo $node$'/r'>>nodes.txt
+  echo $node$'\r'>>nodes.txt
   done
-  echo ssh washbair@$host 'cat static-nodes.json' >>remotenodes
+  echo `ssh washbair@$host 'cat static-nodes.json'`>>remotenodes
  done
- 
- localstnode= `cat static-nodes.json`
+
+ localstnode=`cat static-nodes.json`
  rmstnode=`cat remotenodes`
- echo '['$localstnode$','$rmstnode$']'
- 
+ echo '['$localstnode$','$rmstnode$']'>>static-nodes.json
+
 filename="nodes.txt"
-echo "----------------------------------------------------"
 while read -r line
 do
     scp "static-nodes.json" root@$line:/home/luxbch/data
