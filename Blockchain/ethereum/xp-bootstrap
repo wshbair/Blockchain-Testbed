@@ -1,3 +1,4 @@
+
 #!/usr/bin/ruby -w
 
 # This script, to be executed on a frontend, automates the initial setup
@@ -18,7 +19,7 @@ g5k = Cute::G5K::API.new
 G5K_SITE = `hostname --fqdn`.split('.')[-3] # get the site name from the `hostname` command
 G5K_ENV = 'ubuntu1404-x64-min' # environment to deploy
 NODES = 2
-WALLTIME = '0:30'
+WALLTIME = '1:00'
 
 # When the script is run with --reserve, use Ruby-Cute to reserve resources and run the script again inside the reservation, when it starts
 if ARGV[0] == '--reserve'
@@ -30,8 +31,9 @@ if ARGV[0] == '--reserve'
   puts "Job #{job['uid']} created. Monitor its status with e.g.: oarstat -fj #{job['uid']}"
   exit(0)
 end
+puts"FINISH Reservation"
 
-###########################################################################
+####################################################################
 #### What follows is what gets executed inside the resources reservation
 
 # for better output, redirect stderr to stdout, make stdout a synchronized output stream
@@ -48,34 +50,58 @@ puts "Running on: #{nodes.join(' ')}"
 
 # deploying all nodes, waiting for the end of deployment
 g5k.deploy(job,  :env => G5K_ENV, :wait => true)
+
 raise "Deployment ended with error" if ((job['deploy'].last['status'] == 'error') or (not job['deploy'].last['result'].to_a.all? { |e| e[1]['state'] == 'OK' }))
 
-#Blockchain installation commands
-cmd0 ='sudo apt-get update'
-cmd1 ='sudo apt-get -y install python-software-properties'
-cmd2 ='sudo apt-get install -y software-properties-common'
-cmd3 ='sudo add-apt-repository -y ppa:ethereum/ethereum'
-cmd4 ='sudo apt-get update'
-cmd5 ='sudo apt-get install -y ethereum'
+cmd= "git clone https://github.com/snt-sedan/Blockchain-Testbed.git"
+cmd1= "chmod u+x Blockchain-Testbed/Blockchain/ethereum/*.sh"
+
 puts "Running commands"
 # Run a command on each node and analyze result
 ssh = Net::SSH::Multi::Session::new
 nodes.each { |n| ssh.use "root@#{n}" }
-a = ssh.exec!(cmd0)
-raise "Command failed on at least one node\n#{a}" if not r.to_a.all? { |e| e[1][:status] == 0 }
-b = ssh.exec!(cmd1)
-raise "Command failed on at least one node\n#{b}" if not r.to_a.all? { |e| e[1][:status] == 0 }
-c = ssh.exec!(cmd2)
-raise "Command failed on at least one node\n#{c}" if not r.to_a.all? { |e| e[1][:status] == 0 }
-d = ssh.exec!(cmd3)
-raise "Command failed on at least one node\n#{d}" if not r.to_a.all? { |e| e[1][:status] == 0 }
-e = ssh.exec!(cmd4)
-raise "Command failed on at least one node\n#{e}" if not r.to_a.all? { |e| e[1][:status] == 0 }
-f = ssh.exec!(cmd5)
-raise "Command failed on at least one node\n#{f}" if not r.to_a.all? { |e| e[1][:status] == 0 }
+ ssh.exec!("sudo apt-get update")
+ ssh.exec!("sudo apt-get install -y git")
+ ssh.exec!(cmd) #Download needed software
+ ssh.exec!(cmd1) #make the script executable
+ ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/install.sh")
+ ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/init.sh")#creat a user and run Gensis command
 
-
-# Sleep for a very long time to avoid reservation termination 
 puts "Experiment preparation finished."
-puts "Nodes: #{nodes.join(' ')}"
+
+# Save Nodes names
+File.open("nodes.txt", "w+") do |f|
+  f.puts(nodes)
+end
+
+puts " Generate static nodes Address"
+# We needd to get the address of the static node
+#output = File.open( "static-nodes.json","w" )
+output = File.open( "static-nodes.json","w" )
+#output<<'['
+nodeslink=[]
+for @hostname in nodes
+ @username = "root"
+ @password = ""
+ @cmd = "Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh"
+ begin
+    ssh = Net::SSH.start(@hostname, @username, :password => @password)
+    res = ssh.exec!(@cmd)
+    puts res
+    #output = File.open( "static-nodes.json","w" )
+   # output << res+','
+    nodeslink.push(res)
+    ssh.close
+  rescue
+    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
+ end
+end
+output<<nodeslink.join(',')#+']'
+output.close
+
+puts "Static-nodes file DONE :)"
+puts "Running the BlockChain"
+system "sh BlockChainBuild"
+puts "Ready GO GO GO GO GO GO GO"
+
 sleep 86400*365
