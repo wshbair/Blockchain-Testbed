@@ -1,11 +1,11 @@
 #!/usr/bin/ruby -w
 require 'cute'
 g5k = Cute::G5K::API.new()
-job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '00:30:00', :wait => true, :type => :deploy)
+job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '00:30:00', :wait => true, :type => :deploy,:cmd => File::realpath(__FILE__)
 Luxnodes = job1["assigned_nodes"]
-job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '00:30:00', :wait => true, :type => :deploy)
+job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '00:30:00', :wait => true, :type => :deploy,:cmd => File::realpath(__FILE__)
 Nancynodes = job2["assigned_nodes"]
-job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :wait => true, :type => :deploy)
+job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :wait => true, :type => :deploy,:cmd => File::realpath(__FILE__)
 Lillenodes = job3["assigned_nodes"]
 
 nodes= Luxnodes+Nancynodes+Lillenodes
