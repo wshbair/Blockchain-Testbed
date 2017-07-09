@@ -12,6 +12,11 @@ nodes= Luxnodes+Nancynodes+Lillenodes
 puts "# Nodes are reserved"
 puts nodes
 
+# Save Nodes names
+File.open("nodes.txt", "w+") do |f|
+  f.puts(nodes)
+end
+
 g5k.logger = Logger.new(File.new('experiment_1.log'))
 
 g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
