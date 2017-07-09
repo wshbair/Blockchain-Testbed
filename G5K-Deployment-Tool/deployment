@@ -12,8 +12,7 @@ nodes= Luxnodes+Nancynodes+Lillenodes
 puts "# Nodes are reserved"
 puts nodes
 
-STDERR.reopen(STDOUT)
-STDOUT.sync = true
+g5k.logger = Logger.new(File.new('experiment_1.log'))
 
 g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "LUXMBOURG NODES READY :)"
@@ -33,9 +32,25 @@ nodes.each { |n| ssh.use "root@#{n}" }
  ssh.exec!("chmod u+x Blockchain-Testbed/Blockchain/ethereum/*.sh") #make the script executable
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/install.sh")
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/init.sh")#creat a user and run Gensis command
- res=ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh")
- nodeslink.push(res)
 
+puts " Generate static nodes Address"
+# We needd to get the address of the static node
+output = File.open( "static-nodes.json","w" )
+nodeslink=[]
+for @hostname in nodes
+ @username = "root"
+ @password = ""
+ @cmd = "Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh"
+ begin
+    ssh = Net::SSH.start(@hostname, @username, :password => @password)
+    res = ssh.exec!(@cmd)
+    nodeslink.push(res)
+    ssh.close
+  rescue
+    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
+ end
+end
 output<<'['+nodeslink.join(',')+']'
-
+output.close
 puts "Experiment preparation finished."
+
