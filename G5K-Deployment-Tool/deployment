@@ -17,7 +17,7 @@ File.open("nodes.txt", "w+") do |f|
   f.puts(nodes)
 end
 
-g5k.logger = Logger.new(File.new('experiment_1.log'))
+  #g5k.logger = Logger.new(File.new('experiment_1.log'))
 
 g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "LUXMBOURG NODES READY :)"
@@ -58,4 +58,17 @@ end
 output<<'['+nodeslink.join(',')+']'
 output.close
 puts "Experiment preparation finished."
+
+ for @hostname in nodes
+ @username = "root"
+ @password = ""
+ @cmd = "nohup scp -oStrictHostKeyChecking=no -q "static-nodes.json" root@$host:/home/luxbch/data 2> /dev/null 2>&1 & "
+ begin
+    ssh = Net::SSH.start(@hostname, @username, :password => @password)
+    res = ssh.exec!(@cmd)
+    ssh.close
+  rescue
+    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
+ end
+end  
 
