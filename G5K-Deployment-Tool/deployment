@@ -1,23 +1,21 @@
 #!/usr/bin/ruby -w
 require 'cute'
 g5k = Cute::G5K::API.new()
-job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '00:30:00', :wait => true, :type => :deploy,:cmd => File::realpath(__FILE__))
+job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '00:30:00', :wait => true, :type => :deploy)
 Luxnodes = job1["assigned_nodes"]
-job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '00:30:00', :wait => true, :type => :deploy,:cmd => File::realpath(__FILE__))
+job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '00:30:00', :wait => true, :type => :deploy)
 Nancynodes = job2["assigned_nodes"]
-job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :wait => true, :type => :deploy,:cmd => File::realpath(__FILE__))
+job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :wait => true, :type => :deploy)
 Lillenodes = job3["assigned_nodes"]
 
 nodes= Luxnodes+Nancynodes+Lillenodes
-puts "# Nodes are reserved"
+puts "Nodes are reserved"
 puts nodes
 
 # Save Nodes names
 File.open("nodes.txt", "w+") do |f|
   f.puts(nodes)
 end
-
-  #g5k.logger = Logger.new(File.new('experiment_1.log'))
 
 g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "LUXMBOURG NODES READY :)"
@@ -57,7 +55,7 @@ for @hostname in nodes
 end
 output<<'['+nodeslink.join(',')+']'
 output.close
-puts "Experiment preparation finished."
+puts "Transfereing stati-nodes file to all nodes"
 
  for @hostname in nodes
  @username = "root"
@@ -71,4 +69,5 @@ puts "Experiment preparation finished."
     puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
  end
 end  
+puts "Experiment preparation finished."
 
