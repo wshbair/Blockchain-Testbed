@@ -8,3 +8,4 @@ sudo apt-get update
 sudo apt-get install -y ethereum
 sudo apt-get install -y git
 sudo apt-get install -y python-numpy
+sudo apt-get install -y nano
