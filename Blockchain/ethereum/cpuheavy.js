@@ -37,7 +37,7 @@ var sorter = sorterContract.new(
       #console.log("before send: " + new Date().getTime());
       sendTxn(parseInt(process.argv[2]), 1);
       timestamp = new Date().getTime();
-      #console.log("after send: " + timestamp);
+      //console.log("after send: " + timestamp);
     }
   }
 )
