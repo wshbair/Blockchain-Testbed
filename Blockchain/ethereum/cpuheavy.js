@@ -1,7 +1,7 @@
 var Web3 = require('web3');
 
 var web3 = new Web3();
-web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+web3.setProvider(new web3.providers.HttpProvider('http://localhost:8084'));
 
 var sorterABI = [{"constant":false,"inputs":[{"name":"size","type":"uint256"},{"name":"signature","type":"uint256"}],"name":"sort","outputs":[],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"size","type":"uint256"},{"indexed":false,"name":"signature","type":"uint256"}],"name":"finish","type":"event"}];
 
