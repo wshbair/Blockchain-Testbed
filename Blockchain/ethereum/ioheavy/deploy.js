@@ -18,6 +18,6 @@ var io = ioContract.new(
     gasPrice: 0
   }, function (e, contract) {
     if (typeof contract.address !== 'undefined') {
-      console.log("contract mined: " + contract.address);
+      console.log(contract.address);
     }
   });
