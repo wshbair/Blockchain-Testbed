@@ -30,7 +30,7 @@ function sendTxn(start_key, size, sig) {
   web3.personal.unlockAccount(web3.eth.accounts[0], "");
   contract.write(start_key, size, arg_sig, {
     from: web3.eth.accounts[0],
-    gas: '10000000000000',
+    gas: '4700000',
     gasPrice: 0
   });
 }
