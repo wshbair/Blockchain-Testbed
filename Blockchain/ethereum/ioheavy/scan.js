@@ -1,6 +1,4 @@
 var Web3 = require('web3');
-//var BigNumber = require('bignumber.js');
-
 var web3 = new Web3();
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8084'));
 
@@ -13,10 +11,8 @@ var size = parseInt(process.argv[3]);
 var sig = parseInt(process.argv[4]);
 var contract = ioContract.at(process.argv[5]);
 
-//var arg_sig = new BigNumber(sig);
 
 var timestamp;
-
 var event = contract.finishScan();
 event.watch(function(error, result) {
   var timenow = new Date().getTime();
@@ -38,4 +34,3 @@ function sendTxn(start_key, size, sig) {
 }
 sendTxn(start_key, size, sig);
 timestamp = new Date().getTime();
-
