@@ -10,9 +10,6 @@ var start_key = parseInt(process.argv[2]);
 var size = parseInt(process.argv[3]);
 var sig = parseInt(process.argv[4]);
 var contract = ioContract.at(process.argv[5]);
-
-var arg_sig = new BigNumber(sig);
-
 var timestamp;
 
 var event = contract.finishWrite();
@@ -28,7 +25,7 @@ event.watch(function(error, result) {
 
 function sendTxn(start_key, size, sig) {
   web3.personal.unlockAccount(web3.eth.accounts[0], "");
-  contract.write(start_key, size, arg_sig, {
+  contract.write(start_key, size, sig, {
     from: web3.eth.accounts[0],
     gas: '4700000',
     gasPrice: 0
