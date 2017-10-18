@@ -15,7 +15,7 @@ var timestamp;
 var event = contract.finishWrite();
 event.watch(function(error, result) {
   var timenow = new Date().getTime();
-  if (!result.args.signature.equals(arg_sig)) {
+  if (!result.args.signature.equals(sig)) {
     return;
   }
   console.log(result.args.size.toString(10) + " key-value written. took "
