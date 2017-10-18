@@ -2,13 +2,9 @@ var Web3 = require('web3');
 
 var web3 = new Web3();
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8084'));
-
 var sorterABI = [{"constant":false,"inputs":[{"name":"size","type":"uint256"},{"name":"signature","type":"uint256"}],"name":"sort","outputs":[],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"size","type":"uint256"},{"indexed":false,"name":"signature","type":"uint256"}],"name":"finish","type":"event"}];
-
 var sorterContract = web3.eth.contract(sorterABI);
-
 web3.personal.unlockAccount(web3.eth.accounts[0], "");
-
 var sorter = sorterContract.new(
   {
     from: web3.eth.accounts[0], 
@@ -38,10 +34,10 @@ var sorter = sorterContract.new(
         ));
       }
 
-      console.log("before send: " + new Date().getTime());
+      #console.log("before send: " + new Date().getTime());
       sendTxn(parseInt(process.argv[2]), 1);
       timestamp = new Date().getTime();
-      console.log("after send: " + timestamp);
+      #console.log("after send: " + timestamp);
     }
   }
 )
