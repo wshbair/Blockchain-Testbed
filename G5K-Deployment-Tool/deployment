@@ -1,15 +1,15 @@
 #!/usr/bin/ruby -w
 require 'cute'
 g5k = Cute::G5K::API.new()
-job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '00:30:00', :wait => true, :type => :deploy)
+job1 = g5k.reserve(:nodes => 5, :site => 'luxembourg', :walltime => '1:30:00', :wait => true, :type => :deploy)
 Luxnodes = job1["assigned_nodes"]
-job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '00:30:00', :wait => true, :type => :deploy)
+job2 = g5k.reserve(:nodes => 5, :site => 'nancy', :walltime => '1:30:00', :wait => true, :type => :deploy)
 Nancynodes = job2["assigned_nodes"]
-job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '00:30:00', :wait => true, :type => :deploy)
-Lillenodes = job3["assigned_nodes"]
+#job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:30:00', :wait => true, :type => :deploy)
+#Lillenodes = job3["assigned_nodes"]
 
-nodes= Luxnodes+Nancynodes+Lillenodes
-puts "Nodes are reserved"
+nodes= Luxnodes+Nancynodes#+Lillenodes
+puts "# Nodes are reserved"
 puts nodes
 
 # Save Nodes names
@@ -17,16 +17,18 @@ File.open("nodes.txt", "w+") do |f|
   f.puts(nodes)
 end
 
+g5k.logger = Logger.new(File.new('experiment_1.log'))
+
 g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "LUXMBOURG NODES READY :)"
 g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "Nancy NODES READY :)"
-g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "LILLE NODES READY :)"
+#g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "LILLE NODES READY :)"
 output = File.open( "static-nodes.json","w" )
 nodeslink=[]
 puts "Running commands"
- 
+
 ssh = Net::SSH::Multi::Session::new
 nodes.each { |n| ssh.use "root@#{n}" }
  ssh.exec!("sudo apt-get update")
@@ -36,38 +38,36 @@ nodes.each { |n| ssh.use "root@#{n}" }
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/install.sh")
  ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/init.sh")#creat a user and run Gensis command
 
-puts " Generate static nodes Address"
+puts "Generate static node address"
 # We needd to get the address of the static node
 output = File.open( "static-nodes.json","w" )
 nodeslink=[]
+#@hostname =nodes.first
 for @hostname in nodes
  @username = "root"
  @password = ""
  @cmd = "Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh"
- begin
-    ssh = Net::SSH.start(@hostname, @username, :password => @password)
-    res = ssh.exec!(@cmd)
-    nodeslink.push(res)
-    ssh.close
-  rescue
-    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
+   ssh = Net::SSH.start(@hostname, @username, :password => @password)
+   res = ssh.exec!(@cmd)
+   nodeslink.push(res)
+   ssh.close
+#rescue
+#    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
  end
-end
-output<<'['+nodeslink.join(',')+']'
+#end
+output<<'[ '+nodeslink.join(',')+' ]'
 output.close
-puts "Transfereing stati-nodes file to all nodes"
-
- for @hostname in nodes
- @username = "root"
- @password = ""
- @cmd = "nohup scp -oStrictHostKeyChecking=no -q 'static-nodes.json' root@$host:/home/luxbch/data 2> /dev/null 2>&1 & "
- begin
-    ssh = Net::SSH.start(@hostname, @username, :password => @password)
-    res = ssh.exec!(@cmd)
-    ssh.close
-  rescue
-    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
- end
-end  
 puts "Experiment preparation finished."
 
+# for @hostname in nodes
+# @username = "root"
+# @password = ""
+# @cmd = "nohup scp -oStrictHostKeyChecking=no -q 'static-nodes.json' root@$host:/home/luxbch/data 2> /dev/null 2>&1 & "
+# begin
+#    ssh = Net::SSH.start(@hostname, @username, :password => @password)
+#    res = ssh.exec!(@cmd)
+#    ssh.close
+#  rescue
+#    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
+# end
+#end
