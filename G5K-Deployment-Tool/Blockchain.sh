@@ -15,7 +15,7 @@ echo "------------------------------------------------------"
 echo "Blockchain Workload #1"
 for host in `cat $filename`; do
      echo CPUheavy on $host
-     ssh  root@$host  nodejs Blockchain-Testbed/Blockchain/ethereum/cpuheavy.js 10
+     ssh  root@$host  nodejs Blockchain-Testbed/Blockchain/ethereum/cpuheavy.js 10 777
 done
 echo "------------------------------------------------------"
 echo "Blockchain Workload #2"
