@@ -1,8 +1,6 @@
 Cleaning
 echo "Cleaning"
 rm nodes.txt static-nodes.json OAR* oar*
-#Local reservation
-#ruby xp-bootstrap --reserve
 echo "Reservation"
 ruby Bch-Over-G5k
 #clear
