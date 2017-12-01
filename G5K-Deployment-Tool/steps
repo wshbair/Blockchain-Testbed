@@ -11,8 +11,3 @@ Steps to login in G5K
     add-apt-repository -y ppa:ethereum/ethereum
     apt-get update
     apt-get install -y ethereum
-
-
-**** We need to use the Ruby-Cute to autimate all nodes reservation and deplyment 
-
-
