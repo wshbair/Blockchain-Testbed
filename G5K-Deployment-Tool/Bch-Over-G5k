@@ -1,15 +1,25 @@
 #!/usr/bin/ruby -w
 require 'cute'
 g5k = Cute::G5K::API.new()
-job1 = g5k.reserve(:nodes => 5, :site => 'luxembourg', :walltime => '1:30:00', :wait => true, :type => :deploy)
+job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '1:00:00', :wait => true, :type => :deploy)
 Luxnodes = job1["assigned_nodes"]
-job2 = g5k.reserve(:nodes => 5, :site => 'nancy', :walltime => '1:30:00', :wait => true, :type => :deploy)
+job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '1:00:00', :wait => true, :type => :deploy)
 Nancynodes = job2["assigned_nodes"]
-#job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:30:00', :wait => true, :type => :deploy)
-#Lillenodes = job3["assigned_nodes"]
+job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:00:00', :wait => true, :type => :deploy)
+Lillenodes = job3["assigned_nodes"]
+job4 = g5k.reserve(:nodes => 1, :site => 'Sophia', :walltime => '1:00:00', :wait => true, :type => :deploy)
+Sophianodes = job3["assigned_nodes"]
+job5 = g5k.reserve(:nodes => 1, :site => 'Rennes', :walltime => '1:00:00', :wait => true, :type => :deploy)
+Rennesnodes = job3["assigned_nodes"]
+job6 = g5k.reserve(:nodes => 1, :site => 'Nantes', :walltime => '1:00:00', :wait => true, :type => :deploy)
+Nantesnodes = job3["assigned_nodes"]
+job7 = g5k.reserve(:nodes => 1, :site => 'Lyon', :walltime => '1:00:00', :wait => true, :type => :deploy)
+Lyonnodes = job3["assigned_nodes"]
+job8 = g5k.reserve(:nodes => 1, :site => 'Grenoble', :walltime => '1:00:00', :wait => true, :type => :deploy)
+Grenoblenodes = job3["assigned_nodes"]
 
-nodes= Luxnodes+Nancynodes#+Lillenodes
-puts "# Nodes are reserved"
+nodes= Luxnodes+Nancynodes+Lillenodes+Sophianodes+Rennesnodes+Nantesnodes+Lyonnodes+Grenoblenodes
+puts "All nodes are reserved"
 puts nodes
 
 # Save Nodes names
@@ -17,14 +27,23 @@ File.open("nodes.txt", "w+") do |f|
   f.puts(nodes)
 end
 
-g5k.logger = Logger.new(File.new('experiment_1.log'))
-
 g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "LUXMBOURG NODES READY :)"
 g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
 puts "Nancy NODES READY :)"
-#g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
-#puts "LILLE NODES READY :)"
+g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "LILLE NODES READY :)"
+g5k.deploy(job4, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "Sophia NODES READY :)"
+g5k.deploy(job5, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "Rennes NODES READY :)"
+g5k.deploy(job6, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "Nantes NODES READY :)"
+g5k.deploy(job7, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "Lyon NODES READY :)"
+g5k.deploy(job8, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "Grenoble NODES READY :)"
+
 output = File.open( "static-nodes.json","w" )
 nodeslink=[]
 puts "Running commands"
@@ -42,7 +61,6 @@ puts "Generate static node address"
 # We needd to get the address of the static node
 output = File.open( "static-nodes.json","w" )
 nodeslink=[]
-#@hostname =nodes.first
 for @hostname in nodes
  @username = "root"
  @password = ""
@@ -51,23 +69,8 @@ for @hostname in nodes
    res = ssh.exec!(@cmd)
    nodeslink.push(res)
    ssh.close
-#rescue
-#    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
  end
 #end
 output<<'[ '+nodeslink.join(',')+' ]'
 output.close
 puts "Experiment preparation finished."
-
-# for @hostname in nodes
-# @username = "root"
-# @password = ""
-# @cmd = "nohup scp -oStrictHostKeyChecking=no -q 'static-nodes.json' root@$host:/home/luxbch/data 2> /dev/null 2>&1 & "
-# begin
-#    ssh = Net::SSH.start(@hostname, @username, :password => @password)
-#    res = ssh.exec!(@cmd)
-#    ssh.close
-#  rescue
-#    puts "Unable to connect to #{@hostname} using #{@username}/#{@password}"
-# end
-#end
