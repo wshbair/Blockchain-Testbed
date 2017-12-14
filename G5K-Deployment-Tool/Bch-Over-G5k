@@ -1,21 +1,21 @@
 #!/usr/bin/ruby -w
 require 'cute'
 g5k = Cute::G5K::API.new()
-job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Luxnodes = job1["assigned_nodes"]
-job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '1:00:00', :wait => true, :type => :deploy, :env => 'ubuntu1404-x64-min')
 Nancynodes = job2["assigned_nodes"]
-job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Lillenodes = job3["assigned_nodes"]
-job4 = g5k.reserve(:nodes => 1, :site => 'Sophia', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job4 = g5k.reserve(:nodes => 1, :site => 'Sophia', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Sophianodes = job4["assigned_nodes"]
-job5 = g5k.reserve(:nodes => 1, :site => 'Rennes', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job5 = g5k.reserve(:nodes => 1, :site => 'Rennes', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Rennesnodes = job5["assigned_nodes"]
-job6 = g5k.reserve(:nodes => 1, :site => 'Nantes', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job6 = g5k.reserve(:nodes => 1, :site => 'Nantes', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Nantesnodes = job6["assigned_nodes"]
-job7 = g5k.reserve(:nodes => 1, :site => 'Lyon', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job7 = g5k.reserve(:nodes => 1, :site => 'Lyon', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Lyonnodes = job7["assigned_nodes"]
-job8 = g5k.reserve(:nodes => 1, :site => 'Grenoble', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job8 = g5k.reserve(:nodes => 1, :site => 'Grenoble', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Grenoblenodes = job8["assigned_nodes"]
 
 nodes= Luxnodes+Nancynodes+Lillenodes+Sophianodes+Rennesnodes+Nantesnodes+Lyonnodes+Grenoblenodes
@@ -27,22 +27,22 @@ File.open("nodes.txt", "w+") do |f|
   f.puts(nodes)
 end
 
-g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "LUXMBOURG NODES READY :)"
-g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "Nancy NODES READY :)"
-g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "LILLE NODES READY :)"
-g5k.deploy(job4, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "Sophia NODES READY :)"
-g5k.deploy(job5, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "Rennes NODES READY :)"
-g5k.deploy(job6, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "Nantes NODES READY :)"
-g5k.deploy(job7, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "Lyon NODES READY :)"
-g5k.deploy(job8, :env => 'ubuntu1404-x64-min', :wait => true)
-puts "Grenoble NODES READY :)"
+#g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "LUXMBOURG NODES READY :)"
+#g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "Nancy NODES READY :)"
+#g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "LILLE NODES READY :)"
+#g5k.deploy(job4, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "Sophia NODES READY :)"
+#g5k.deploy(job5, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "Rennes NODES READY :)"
+#g5k.deploy(job6, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "Nantes NODES READY :)"
+#g5k.deploy(job7, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "Lyon NODES READY :)"
+#g5k.deploy(job8, :env => 'ubuntu1404-x64-min', :wait => true)
+#puts "Grenoble NODES READY :)"
 
 output = File.open( "static-nodes.json","w" )
 nodeslink=[]
