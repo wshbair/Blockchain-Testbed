@@ -24,6 +24,7 @@ sites.each do |site|
         job=g5k.reserve(:nodes => 1, :site => site, :walltime => '0:30:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
         nodes=nodes+job["assigned_nodes"]
       end
+end
 
 #nodes= Luxnodes+Nancynodes+Lillenodes+Sophianodes+Rennesnodes#+Nantesnodes+Lyonnodes+Grenoblenodes
 puts "All nodes are reserved"
