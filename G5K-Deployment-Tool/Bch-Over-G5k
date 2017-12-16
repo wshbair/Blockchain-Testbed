@@ -7,15 +7,15 @@ job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '1:00:00', :wait 
 Nancynodes = job2["assigned_nodes"]
 job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Lillenodes = job3["assigned_nodes"]
-job4 = g5k.reserve(:nodes => 1, :site => 'Sophia', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
+job4 = g5k.reserve(:nodes => 1, :site => 'sophia', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Sophianodes = job4["assigned_nodes"]
-job5 = g5k.reserve(:nodes => 1, :site => 'Rennes', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
+job5 = g5k.reserve(:nodes => 1, :site => 'rennes', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 Rennesnodes = job5["assigned_nodes"]
-#job6 = g5k.reserve(:nodes => 1, :site => 'Nantes', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
+#job6 = g5k.reserve(:nodes => 1, :site => 'nantes', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 #Nantesnodes = job6["assigned_nodes"]
-#job7 = g5k.reserve(:nodes => 1, :site => 'Lyon', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
+#job7 = g5k.reserve(:nodes => 1, :site => 'lyon', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 #Lyonnodes = job7["assigned_nodes"]
-#job8 = g5k.reserve(:nodes => 1, :site => 'Grenoble', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
+#job8 = g5k.reserve(:nodes => 1, :site => 'grenoble', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 #Grenoblenodes = job8["assigned_nodes"]
 
 nodes= Luxnodes+Nancynodes+Lillenodes+Sophianodes+Rennesnodes#+Nantesnodes+Lyonnodes+Grenoblenodes
