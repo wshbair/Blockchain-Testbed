@@ -1,0 +1,49 @@
+#!/usr/bin/ruby -w
+require 'cute'x
+g5k = Cute::G5K::API.new()
+nodes=[]
+sites = g5k.site_uids
+sites.each do |site|
+      begin
+        job=g5k.reserve(:nodes => 1, :site => site, :walltime => '0:30:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
+        nodes=nodes+job["assigned_nodes"]
+      end
+end
+puts "All nodes are reserved"
+puts nodes
+
+# Save Nodes names
+File.open("nodes.txt", "w+") do |f|
+  f.puts(nodes)
+end
+
+output = File.open( "static-nodes.json","w" )
+nodeslink=[]
+puts "Running commands"
+
+ssh = Net::SSH::Multi::Session::new
+nodes.each { |n| ssh.use "root@#{n}" }
+ ssh.exec!("sudo apt-get update")
+ ssh.exec!("sudo apt-get install -y git")
+ ssh.exec!("git clone https://github.com/snt-sedan/Blockchain-Testbed.git") #Download needed software
+ ssh.exec!("chmod u+x Blockchain-Testbed/Blockchain/ethereum/*.sh") #make the script executable
+ ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/install.sh")
+ ssh.exec!("Blockchain-Testbed/Blockchain/ethereum/init.sh")#creat a user and run Gensis command
+
+puts "Generate static node address"
+# We needd to get the address of the static node
+output = File.open( "static-nodes.json","w" )
+nodeslink=[]
+for @hostname in nodes
+ @username = "root"
+ @password = ""
+ @cmd = "Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh"
+   ssh = Net::SSH.start(@hostname, @username, :password => @password)
+   res = ssh.exec!(@cmd)
+   nodeslink.push(res)
+   ssh.close
+ end
+#end
+output<<'[ '+nodeslink.join(',')+' ]'
+output.close
+puts "Experiment preparation finished."
