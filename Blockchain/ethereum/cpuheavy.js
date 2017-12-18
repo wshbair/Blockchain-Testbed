@@ -28,8 +28,7 @@ var sorter = sorterContract.new(
         console.log(contract.sort(size, signature,
           {
             from: web3.eth.accounts[0],
-            gas: '4700000',
-            gasPrice: 0
+            gas: '4700000'
           }
         ));
       }
