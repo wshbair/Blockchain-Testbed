@@ -1,10 +1,10 @@
 #!/usr/bin/ruby -w
 require 'cute'
 g5k = Cute::G5K::API.new()
-#job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
-#Luxnodes = job1["assigned_nodes"]
-#job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '1:00:00', :wait => true, :type => :deploy, :env => 'ubuntu1404-x64-min')
-#Nancynodes = job2["assigned_nodes"]
+job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
+Luxnodes = job1["assigned_nodes"]
+job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '1:00:00', :wait => true, :type => :deploy, :env => 'ubuntu1404-x64-min')
+Nancynodes = job2["assigned_nodes"]
 #job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 #Lillenodes = job3["assigned_nodes"]
 #job4 = g5k.reserve(:nodes => 1, :site => 'sophia', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
@@ -17,16 +17,8 @@ g5k = Cute::G5K::API.new()
 #Lyonnodes = job7["assigned_nodes"]
 #job8 = g5k.reserve(:nodes => 1, :site => 'grenoble', :walltime => '1:00:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
 #Grenoblenodes = job8["assigned_nodes"]
-nodes=""
-sites = g5k.site_uids
-sites.each do |site|
-      begin
-        job=g5k.reserve(:nodes => 1, :site => site, :walltime => '0:30:00', :wait => true, :type => :deploy,:env => 'ubuntu1404-x64-min')
-        nodes=nodes+job["assigned_nodes"]
-      end
-end
 
-#nodes= Luxnodes+Nancynodes+Lillenodes+Sophianodes+Rennesnodes#+Nantesnodes+Lyonnodes+Grenoblenodes
+nodes= Luxnodes+Nancynodes#+Lillenodes+Sophianodes+Rennesnodes#+Nantesnodes+Lyonnodes+Grenoblenodes
 puts "All nodes are reserved"
 puts nodes
 
@@ -35,10 +27,10 @@ File.open("nodes.txt", "w+") do |f|
   f.puts(nodes)
 end
 
-#g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
-#puts "LUXMBOURG NODES READY :)"
-#g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
-#puts "Nancy NODES READY :)"
+g5k.deploy(job1, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "LUXMBOURG NODES READY :)"
+g5k.deploy(job2, :env => 'ubuntu1404-x64-min', :wait => true)
+puts "Nancy NODES READY :)"
 #g5k.deploy(job3, :env => 'ubuntu1404-x64-min', :wait => true)
 #puts "LILLE NODES READY :)"
 #g5k.deploy(job4, :env => 'ubuntu1404-x64-min', :wait => true)
