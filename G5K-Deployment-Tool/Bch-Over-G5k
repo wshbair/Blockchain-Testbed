@@ -62,15 +62,14 @@ puts "Generate static node address"
 output = File.open( "static-nodes.json","w" )
 nodeslink=[]
 for @hostname in nodes
- @username = "root"
- @password = ""
- @cmd = "Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh"
-   ssh = Net::SSH.start(@hostname, @username, :password => @password)
-   res = ssh.exec!(@cmd)
-   nodeslink.push(res)
-   ssh.close
- end
-#end
+  @username = "root"
+  @password = ""
+  @cmd = "Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh"
+  ssh = Net::SSH.start(@hostname, @username, :password => @password)
+  res = ssh.exec!(@cmd)
+  nodeslink.push(res)
+  ssh.close
+end
 output<<'[ '+nodeslink.join(',')+' ]'
 output.close
 puts "Experiment preparation finished."
