@@ -2,7 +2,7 @@ var Web3 = require('web3');
 const fs = require('fs');
 const solc = require('solc');
 var poissonProcess = require('poisson-process');
-var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8084"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 // Compile the source code
 const input = fs.readFileSync('Eethiq.sol');
