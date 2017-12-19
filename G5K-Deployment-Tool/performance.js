@@ -59,15 +59,11 @@ var io = ioContract.new(
                     if (conter==clientnumber)
                             {
                                 var output='';
-                                for (i=0;i<clientaddresses.length;i++)
-                                    console.log(delays[i]);
-                                    fs.writeFile("Result1.txt",delays[i], function(err) {
-                                        if(err) {
-                                            return console.log(err);
-                                        }
-                                        console.log("The file was saved!");
-                                        }); 
-                                    
+				var file = fs.createWriteStream('Result1.txt');
+				file.on('error', function(err) { /* error handling */ });
+				delays.forEach(function(v) { file.write(v.join(', ') + '\n'); });
+				file.end();    
+				                                       
                                 clearInterval(timer);	
                             }
                 },3000);    
