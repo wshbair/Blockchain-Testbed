@@ -59,10 +59,9 @@ var io = ioContract.new(
                     if (conter==clientnumber)
                             {
                                 var output='';
-				var file = fs.createWriteStream('Result1.txt');
-				file.on('error', function(err) { /* error handling */ });
-				delays.forEach(function(v) { file.write(v.join(', ') + '\n'); });
-				file.end();    
+                                fs.writeFile("Result1.txt",delays, function(err) {
+                                   if(err) {return console.log(err); }
+                                  console.log("The file was saved!"); }); 
 				                                       
                                 clearInterval(timer);	
                             }
