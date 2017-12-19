@@ -11,3 +11,6 @@ sudo apt-get install -y python-numpy
 sudo apt-get install -y nano
 sudo apt-get install -y npm
 npm install web3@0.19
+npm install poisson-process
+npm install solc
+npm install file-system --save
