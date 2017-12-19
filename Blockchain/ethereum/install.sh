@@ -17,3 +17,5 @@ npm install file-system --save
 sudo apt-get install curl
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
+curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.rpm.sh | sudo bash
+sudo apt-get install -y restclient-cpp
