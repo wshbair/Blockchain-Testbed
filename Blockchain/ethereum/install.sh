@@ -14,8 +14,9 @@ npm install web3@0.19
 npm install poisson-process
 npm install solc
 npm install file-system --save
-sudo apt-get install curl
+sudo apt-get install -y curl
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
-curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.rpm.sh | sudo bash
+curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.deb.sh | sudo bash
 sudo apt-get install -y restclient-cpp
+sudo apt-get install -y libcurl4-openssl-dev
