@@ -68,7 +68,7 @@ void EVMDB::Amalgate(unsigned acc1, unsigned acc2) {
   double start_time = time_now();
   std::string txn_hash = submit_amalgate_txn(to_string(acc1), to_string(acc2), 
       endpoint_, from_address_, to_address_);
-  std::cout << "amalgate:" << txn_hash << std::endl;
+  //std::cout << "amalgate:" << txn_hash << std::endl;
   txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
   txlock_->unlock(); 
