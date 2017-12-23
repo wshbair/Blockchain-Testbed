@@ -174,7 +174,7 @@ int main(const int argc, const char* argv[]) {
   for (auto& th : threads) th.join();
 
   double duration = timer.End();
-  double l = latency.load() / 1000000.0;
+  //double l = latency.load() / 1000000.0;
   int current_tip = sb->get_tip_block_number();
   
   cerr << "# Transaction throughput (KTPS)" << endl;
