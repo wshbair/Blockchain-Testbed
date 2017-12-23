@@ -24,6 +24,7 @@ std::atomic<unsigned long long> latency_interval(0);
 std::atomic<unsigned long long> ops(0);
 std::ofstream os_;
 Timer<double> stat_timer;
+int blocknumber=0;
 
 const int HL_CONFIRM_BLOCK_LENGTH = 1;
 const int BLOCK_POLLING_INTERVAL = 2; 
@@ -151,6 +152,7 @@ int main(const int argc, const char* argv[]) {
   os_.open(props.GetProperty("file_path", "stat.txt"), std::ios::app);
 
   int current_tip = sb->get_tip_block_number();
+  blocknumber=current_tip;
   cout << "Current TIP = " << current_tip << endl;
   sb->Init(&pendingtx, &txlock_); 
 
@@ -173,11 +175,13 @@ int main(const int argc, const char* argv[]) {
 
   double duration = timer.End();
   double l = latency.load() / 1000000.0;
+  int current_tip = sb->get_tip_block_number();
   
   cerr << "# Transaction throughput (KTPS)" << endl;
   cerr << total_ops / duration / 1000 << endl;
   cerr << endl
-       << "Avg latency: " << l / total_ops << " sec" << endl;
+       << "Duration: " << duration << " sec" << endl;
+   cerr<< "BlockNumber:" << current_tip-blocknumber <<endl;
   if (os_.is_open()) os_.close();
   return 0;
 }
