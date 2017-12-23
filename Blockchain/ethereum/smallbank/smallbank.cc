@@ -175,13 +175,12 @@ int main(const int argc, const char* argv[]) {
 
   double duration = timer.End();
   //double l = latency.load() / 1000000.0;
-  int current_tip = sb->get_tip_block_number();
   
   cerr << "# Transaction throughput (KTPS)" << endl;
   cerr << total_ops / duration / 1000 << endl;
   cerr << endl
        << "Duration: " << duration << " sec" << endl;
-   cerr<< "BlockNumber:" << current_tip-blocknumber <<endl;
+   cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
   if (os_.is_open()) os_.close();
   return 0;
 }
