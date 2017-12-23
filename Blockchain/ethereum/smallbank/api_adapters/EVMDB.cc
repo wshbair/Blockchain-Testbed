@@ -79,7 +79,7 @@ void EVMDB::GetBalance(unsigned acc) {
   double start_time = time_now();
   std::string txn_hash = submit_getBalance_txn(to_string(acc),
       endpoint_, from_address_, to_address_);
-  std::cout << "getBalance:" << txn_hash << std::endl;
+  //std::cout << "getBalance:" << txn_hash << std::endl;
   txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
   txlock_->unlock();
@@ -90,7 +90,7 @@ void EVMDB::UpdateBalance(unsigned acc, unsigned amount) {
   double start_time = time_now();
   std::string txn_hash = submit_updateBalance_txn(to_string(acc), amount,
       endpoint_, from_address_, to_address_);
-  std::cout << "updateBalance:" << txn_hash << std::endl;
+  //std::cout << "updateBalance:" << txn_hash << std::endl;
   txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
   txlock_->unlock();
@@ -101,7 +101,7 @@ void EVMDB::UpdateSaving(unsigned acc, unsigned amount) {
   double start_time = time_now();
   std::string txn_hash = submit_updateSaving_txn(to_string(acc), amount,
       endpoint_, from_address_, to_address_);
-  std::cout << "updateSaving:" << txn_hash << std::endl;
+  //std::cout << "updateSaving:" << txn_hash << std::endl;
   txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
   txlock_->unlock();
@@ -112,7 +112,7 @@ void EVMDB::SendPayment(unsigned acc1, unsigned acc2, unsigned amount) {
   double start_time = time_now();
   std::string txn_hash = submit_sendPayment_txn(to_string(acc1), to_string(acc2), amount,
       endpoint_, from_address_, to_address_);
-  std::cout << "sendPayment:" << txn_hash << std::endl;
+  //std::cout << "sendPayment:" << txn_hash << std::endl;
   txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
   txlock_->unlock();
@@ -123,7 +123,7 @@ void EVMDB::WriteCheck(unsigned acc, unsigned amount) {
   double start_time = time_now();
   std::string txn_hash = submit_writeCheck_txn(to_string(acc), amount,
       endpoint_, from_address_, to_address_);
-  std::cout << "writeCheck:" << txn_hash << std::endl;
+  //std::cout << "writeCheck:" << txn_hash << std::endl;
   txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
   txlock_->unlock();
