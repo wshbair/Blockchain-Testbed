@@ -178,9 +178,8 @@ int main(const int argc, const char* argv[]) {
   
   cerr << "# Transaction throughput (KTPS)" << endl;
   cerr << total_ops / duration / 1000 << endl;
-  cerr << endl
-       << "Duration: " << duration << " sec" << endl;
-   cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
+  cerr << "Duration: " << duration << " sec" << endl;
+  cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
   if (os_.is_open()) os_.close();
   return 0;
 }
