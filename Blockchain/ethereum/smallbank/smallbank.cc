@@ -92,8 +92,8 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
       sleep(interval); 
     while (cur_block_height + confirm_duration <= tip) {      
       vector<string> txs = sb->poll_tx(cur_block_height); 
-      cout << "polled block " << cur_block_height << " : " << txs.size() 
-           << " txs " << endl; 
+      //cout << "polled block " << cur_block_height << " : " << txs.size() 
+       //    << " txs " << endl; 
       cur_block_height++;           
       long block_time = time_now(); 
       txlock_.lock();
@@ -110,9 +110,9 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
       }
       txlock_.unlock(); 
     }
-    cout << "In the last "<< interval <<"s, tx count = " << txcount
-         << " latency = " << latency/1000000000.0 
-        << " outstanding request = " << pendingtx.size() << endl;  
+    //cout << "In the last "<< interval <<"s, tx count = " << txcount
+    //     << " latency = " << latency/1000000000.0 
+    //    << " outstanding request = " << pendingtx.size() << endl;  
     txcount = 0; 
     latency = 0; 
 
