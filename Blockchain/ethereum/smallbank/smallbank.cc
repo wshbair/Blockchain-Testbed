@@ -175,11 +175,12 @@ int main(const int argc, const char* argv[]) {
 
   double duration = timer.End();
   //double l = latency.load() / 1000000.0;
-  
-  cerr << "# Transaction throughput (KTPS)" << endl;
-  cerr << total_ops / duration / 1000 << endl;
-  cerr << "Duration: " << duration << " sec" << endl;
-  cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
+  //cerr << "# Transaction throughput (KTPS)" << endl;
+  //cerr << total_ops / duration / 1000 << endl;
+  //cerr << "Duration: " << duration << " sec" << endl;
+  //cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
+  cerr<<'# Result, KTPS, duration, number of Blocks'<<endl;
+  cerr<<total_ops / duration / 1000<<duration<<sb->get_tip_block_number()-blocknumber <<endl;
   if (os_.is_open()) os_.close();
   return 0;
 }
@@ -299,7 +300,7 @@ void UsageMessage(const char *command) {
   cout << "                   be specified, and will be processed in the order "
           "specified" << endl;
   cerr << "   eg: " << "./driver"
-         << " -ops 10000 -threads 4 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8000 -db ethereum" << endl;
+         << " -ops 10000 -threads 4 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum" << endl;
 }
 
 inline bool StrStartWith(const char *str, const char *pre) {
