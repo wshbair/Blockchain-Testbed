@@ -179,8 +179,8 @@ int main(const int argc, const char* argv[]) {
   //cerr << total_ops / duration / 1000 << endl;
   //cerr << "Duration: " << duration << " sec" << endl;
   //cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
-  cerr<<'# Result, KTPS, duration, number of Blocks'<<endl;
-  cerr<<total_ops / duration / 1000<<duration<<sb->get_tip_block_number()-blocknumber <<endl;
+  cerr << '# Result, KTPS, duration, number of Blocks'<<endl;
+  cerr << total_ops / duration / 1000<<duration<<sb->get_tip_block_number()-blocknumber <<endl;
   if (os_.is_open()) os_.close();
   return 0;
 }
