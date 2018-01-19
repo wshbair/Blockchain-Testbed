@@ -1,21 +1,23 @@
 #!/usr/bin/ruby -w
 require 'cute'
 g5k = Cute::G5K::API.new()
-job1 = g5k.reserve(:nodes => 1, :site => 'luxembourg', :walltime => '1:00:00', :wait => true, :type => :deploy)
+time='5:00:00'
+nodes_number=6
+job1 = g5k.reserve(:nodes => nodes_number, :site => 'luxembourg', :walltime => time, :wait => true, :type => :deploy)
 Luxnodes = job1["assigned_nodes"]
-job2 = g5k.reserve(:nodes => 1, :site => 'nancy', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job2 = g5k.reserve(:nodes => nodes_number, :site => 'nancy', :walltime => time, :wait => true, :type => :deploy)
 Nancynodes = job2["assigned_nodes"]
-job3 = g5k.reserve(:nodes => 1, :site => 'lille', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job3 = g5k.reserve(:nodes => nodes_number, :site => 'lille', :walltime => time, :wait => true, :type => :deploy)
 Lillenodes = job3["assigned_nodes"]
-job4 = g5k.reserve(:nodes => 1, :site => 'sophia', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job4 = g5k.reserve(:nodes => 1, :site => 'sophia', :walltime => time, :wait => true, :type => :deploy)
 Sophianodes = job4["assigned_nodes"]
-job5 = g5k.reserve(:nodes => 1, :site => 'rennes', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job5 = g5k.reserve(:nodes => nodes_number, :site => 'rennes', :walltime => time, :wait => true, :type => :deploy)
 Rennesnodes = job5["assigned_nodes"]
-job6 = g5k.reserve(:nodes => 1, :site => 'nantes', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job6 = g5k.reserve(:nodes => nodes_number, :site => 'nantes', :walltime => time, :wait => true, :type => :deploy)
 Nantesnodes = job6["assigned_nodes"]
-job7 = g5k.reserve(:nodes => 1, :site => 'lyon', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job7 = g5k.reserve(:nodes => nodes_number, :site => 'lyon', :walltime => time, :wait => true, :type => :deploy)
 Lyonnodes = job7["assigned_nodes"]
-job8 = g5k.reserve(:nodes => 1, :site => 'grenoble', :walltime => '1:00:00', :wait => true, :type => :deploy)
+job8 = g5k.reserve(:nodes => nodes_number, :site => 'grenoble', :walltime => time, :wait => true, :type => :deploy)
 Grenoblenodes = job8["assigned_nodes"]
 
 nodes= Luxnodes+Nancynodes+Lillenodes+Sophianodes+Rennesnodes+Nantesnodes+Lyonnodes+Grenoblenodes
