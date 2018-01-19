@@ -1,0 +1,8 @@
+Steps to login in G5K
+----------------------------------------------------
+1. ssh account@access.grid5000.fr
+2. Connect to a selected site, such as luxmbourg
+3. Run the orchestration.sh to reserv nodes and to deploy OS and Ethereurm blockchain
+4. Run the mining.sh to make nodes gain some Ether for experiments 
+5. Use the stop.sh to kill geth clients in all nodes
+6. Use console-only.sh to run the geth client in all nodes
