@@ -8,10 +8,11 @@ nodes=""
 sites = g5k.site_uids
 job = {}
 sites.each do |site|
-  job = g5k.reserve(:nodes => nodes_number, :site => site, :walltime => time, :wait => true, :env => 'ubuntu1404-x64-min', :type => :deploy)
+  job = g5k.reserve(:nodes => nodes_number, :site => site, :walltime => time, :wait => false, :env => 'ubuntu1404-x64-min', :type => :deploy)
   begin
     job = g5k.wait_for_job(job, :wait_time => 60)
-    nodes=nodes+ job['assigned_nodes']
+    x=job['assigned_nodes']
+    nodes=nodes+x
   rescue  Cute::G5K::EventTimeout
     puts "We waited too long in site #{site} let's release the job and try in another site"
     g5k.release(job)
