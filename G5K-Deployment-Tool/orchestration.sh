@@ -2,7 +2,8 @@ Cleaning
 echo "Cleaning"
 rm nodes.txt static-nodes.json OAR* oar*
 echo "Reservation"
-ruby Bch-Over-G5k
+#ruby Bch-Over-G5k
+ruby G5KNodeReservation.rb $1 $2
 #clear
 filename="nodes.txt"
 echo 'Transfering static-nodes to network nodes'
