@@ -27,7 +27,7 @@ puts nodes
 
 # Save Nodes names
 File.open("nodes.txt", "w+") do |f|
-  f.puts(nodes)
+  f.puts(g5knodes)
 end
 
 #save jobs id
@@ -40,7 +40,7 @@ nodeslink=[]
 puts "Installing Ethereurm Blockchain on all nodes"
 
 ssh = Net::SSH::Multi::Session::new
-nodes.each { |n| ssh.use "root@#{n}" }
+g5knodes.each { |n| ssh.use "root@#{n}" }
  ssh.exec!("sudo apt-get update")
  ssh.exec!("sudo apt-get install -y git")
  ssh.exec!("git clone https://github.com/snt-sedan/Blockchain-Testbed.git") #Download needed software
@@ -52,7 +52,7 @@ puts "Generating static-node address"
 # We needd to get the address of the static node
 output = File.open( "static-nodes.json","w" )
 nodeslink=[]
-for @hostname in nodes
+for @hostname in g5knodes
   @username = "root"
   @password = ""
   @cmd = "Blockchain-Testbed/Blockchain/ethereum/GenerateStaticNode.sh"
