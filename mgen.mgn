@@ -1,10 +1,6 @@
 # MGEN script begins here
 # These are some "Transmission Event" script lines
 
-# Monitor some ports for UDP traffic
-0.0 LISTEN UDP 5000-5002,6000,6003
-
-# Originate two UDP flows
 0.0 ON 1 UDP SRC 5000 DST **** PERIODIC [1 1024]
 
 # Modify the pattern/rate of flow 2 4 seconds into the test
