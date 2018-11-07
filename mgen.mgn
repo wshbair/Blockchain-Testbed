@@ -1,7 +1,7 @@
 # MGEN script begins here
 # These are some "Transmission Event" script lines
 
-0.0 ON 1 UDP SRC 5000 DST granduc-4.luxembourg.grid5000.fr PERIODIC [10 1024]
+0.0 ON 1 UDP SRC 5000 DST granduc-4.luxembourg.grid5000.fr/5000 PERIODIC [10 1024]
 
 # Modify the pattern/rate of flow 2 4 seconds into the test
 #200.0 MOD 1 POISSON [100 1024]
