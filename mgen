@@ -1,0 +1,23 @@
+# MGEN script begins here
+# These are some "Transmission Event" script lines
+
+# Monitor some ports for UDP traffic
+0.0 LISTEN UDP 5000-5002,6000,6003
+
+# Originate two UDP flows
+0.0 ON 1 UDP SRC 5000 DST **** PERIODIC [1 1024]
+
+# Modify the pattern/rate of flow 2 4 seconds into the test
+20.0 MOD 1 POISSON [10 1024]
+
+# These script lines send a single 1 megabyte TCP mgen message
+# Note that the "mgen message" will be received in multiple
+# "mgen fragments" by the target node.
+
+50.0 ON 2 TCP DST ***/5000 PERIODIC [1 1048576] COUNT 1
+
+# More MGEN lines (terminate the flows)
+100.0 OFF 1
+120.0 OFF 2
+
+# MGEN script ends here
