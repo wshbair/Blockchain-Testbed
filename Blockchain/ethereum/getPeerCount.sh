@@ -8,5 +8,5 @@ temp=`echo $json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=s
 
 json=`curl -H "Content-Type: application/json" --silent --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":74}' localhost:8084`
 prop='result'
-count =`jsonval`
- echo $count 
+count=`jsonval`
+echo $count 
