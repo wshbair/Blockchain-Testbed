@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Compile the workload generator"
-ch smallbank 
-make
-echo "Completed ! "
+#echo "Compile the workload generator"
+cd smallbank 
+var =$(make)
+echo "Done"
