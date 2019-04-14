@@ -110,9 +110,9 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
       }
       txlock_.unlock(); 
     }
-    //cout << "In the last "<< interval <<"s, tx count = " << txcount
-    //     << " latency = " << latency/1000000000.0 
-    //    << " outstanding request = " << pendingtx.size() << endl;  
+    cout << "In the last "<< interval <<"s, tx count = " << txcount
+         << " latency = " << latency/1000000000.0 
+        << " outstanding request = " << pendingtx.size() << endl;  
     txcount = 0; 
     latency = 0; 
 
