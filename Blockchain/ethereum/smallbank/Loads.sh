@@ -1,9 +1,8 @@
 
 
-./Blockchain-Testbed/Blockchain/ethereum/smallbank/driver -ops $1 -threads $2 -txrate $3 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
+#./Blockchain-Testbed/Blockchain/ethereum/smallbank/driver -ops $1 -threads $2 -txrate $3 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
 #echo '10 txRate ------------------------------------------------------'
-#./driver  -ops 2000 -threads 4 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
-#./driver  -ops 2000 -threads 6 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
+./driver  -ops 2000 -threads 6 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
 #./driver  -ops 2000 -threads 8 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
 #./driver  -ops 2000 -threads 10 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
 #./driver  -ops 2000 -threads 12 -txrate 10 -fp stat.txt -endpoint 127.0.0.1:8084 -db ethereum
