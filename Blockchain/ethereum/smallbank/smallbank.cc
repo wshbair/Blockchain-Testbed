@@ -179,8 +179,12 @@ int main(const int argc, const char* argv[]) {
   //cerr << total_ops / duration / 1000 << endl;
   //cerr << "Duration: " << duration << " sec" << endl;
   //cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
-  cerr << "# Result, KTPS, duration, number of Blocks"<<endl;
-  cerr << total_ops / duration / 1000 <<" : " << duration <<" : " << sb->get_tip_block_number()-blocknumber <<endl;
+  cerr << "Transactions number : "<< total_ops<<endl;
+  cerr << "Workload duration: " << duration <<endl;
+  cerr << "Number of Blocks: " << sb->get_tip_block_number()-blocknumber <<endl;
+  cerr << "Throughpot (TPS): "<< total_ops / duration<<endl;
+  //cerr << "# Result, KTPS, duration, number of Blocks"<<endl;
+  //cerr << total_ops / duration / 1000 <<" : " << duration <<" : " << sb->get_tip_block_number()-blocknumber <<endl;
   if (os_.is_open()) os_.close();
   return 0;
 }
