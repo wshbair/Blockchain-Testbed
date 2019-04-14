@@ -187,7 +187,7 @@ int main(const int argc, const char* argv[]) {
   cerr << "Transactions number : "<< total_ops<<endl;
   cerr << "Workload duration: " << duration <<"seconds "<<endl;
   cerr << "Number of Blocks: " << sb->get_tip_block_number()-blocknumber <<"Blocks"<<endl;
-  cerr << "Txs Throughput (TPS): "<< total_ops / duration<< Tx/sec <<endl;
+  cerr << "Txs Throughput (TPS): "<< total_ops / duration<< "Tx/sec" <<endl;
    cerr << "------------------------------------------"<<endl;
   //cerr << "# Result, KTPS, duration, number of Blocks"<<endl;
   //cerr << total_ops / duration / 1000 <<" : " << duration <<" : " << sb->get_tip_block_number()-blocknumber <<endl;
