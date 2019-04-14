@@ -16,6 +16,8 @@
 #include "utils/utils.h"
 #include "utils/properties.h"
 //#define IVL 100
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
 using namespace std;
 
@@ -179,10 +181,14 @@ int main(const int argc, const char* argv[]) {
   //cerr << total_ops / duration / 1000 << endl;
   //cerr << "Duration: " << duration << " sec" << endl;
   //cerr<< "BlockNumber:" << sb->get_tip_block_number()-blocknumber <<endl;
+  cerr << "------------------------------------------"<endl;
+  printf(ANSI_COLOR_GREEN   "Results"   ANSI_COLOR_RESET "\n");
+  cerr << "------------------------------------------"<endl;
   cerr << "Transactions number : "<< total_ops<<endl;
-  cerr << "Workload duration: " << duration <<endl;
-  cerr << "Number of Blocks: " << sb->get_tip_block_number()-blocknumber <<endl;
-  cerr << "Throughpot (TPS): "<< total_ops / duration<<endl;
+  cerr << "Workload duration: " << duration <<"seconds "<<endl;
+  cerr << "Number of Blocks: " << sb->get_tip_block_number()-blocknumber <<"Blocks"<<endl;
+  cerr << "Txs Throughput (TPS): "<< total_ops / duration<< Tx/sec <<endl;
+   cerr << "------------------------------------------"<endl;
   //cerr << "# Result, KTPS, duration, number of Blocks"<<endl;
   //cerr << total_ops / duration / 1000 <<" : " << duration <<" : " << sb->get_tip_block_number()-blocknumber <<endl;
   if (os_.is_open()) os_.close();
