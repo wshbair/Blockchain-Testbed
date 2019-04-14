@@ -153,7 +153,7 @@ int main(const int argc, const char* argv[]) {
 
   int current_tip = sb->get_tip_block_number();
   blocknumber=current_tip;
-  cout << "Current TIP = " << current_tip << endl;
+  cout << "Current Top Block Number = " << current_tip << endl;
   sb->Init(&pendingtx, &txlock_); 
 
   const int thread_num = stoi(props.GetProperty("threadcount", "1"));
