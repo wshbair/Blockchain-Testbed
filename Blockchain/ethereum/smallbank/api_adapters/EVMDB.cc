@@ -49,7 +49,7 @@ void EVMDB::deploy(const std::string& dbname, const std::string& endpoint) {
   endpoint_ = endpoint; 
   std::vector<std::string> args; 
   from_address_ = get_from_address(endpoint_);
-  cout << "Depoly Work Generator Smart Contract" << endl; 
+  cout << "> Depoly Work Generator Smart Contract" << endl; 
   cout << "From address: " << from_address_ << endl;
   evmtype_ = (dbname == "parity") ? EVMType::Parity : EVMType::Ethereum;
   if (evmtype_ == EVMType::Parity) unlock_address(endpoint_, from_address_);
@@ -59,6 +59,7 @@ void EVMDB::deploy(const std::string& dbname, const std::string& endpoint) {
     std::this_thread::sleep_for(std::chrono::seconds(deploy_wait_sec));
     to_address_ = lookup_smart_contract_address_or_die(endpoint_, receipt);
     cout << "To address: " << to_address_ << endl; 
+    cout <<"--------------------------------------"<<endl; 
      
     deploy_wait_sec = 10;
   }
