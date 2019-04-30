@@ -13,7 +13,7 @@ var sorter = sorterContract.new(
   },
   function (e, contract) {
     if (typeof contract.address !== 'undefined') {
-      //console.log("contract mined: " + contract.address);
+      console.log("contract mined: " + contract.address);
       
       var timestamp;
       var event = contract.finish();
