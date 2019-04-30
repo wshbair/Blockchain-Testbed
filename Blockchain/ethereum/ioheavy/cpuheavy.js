@@ -25,18 +25,16 @@ var sorter = sorterContract.new(
 
       function sendTxn(size, signature) {
         web3.personal.unlockAccount(web3.eth.accounts[0], "");
-        console.log(contract.sort(size, signature,
+        contract.sort(size, signature,
           {
             from: web3.eth.accounts[0],
             gas: '4700000'
           }
-        ));
+        )
       }
-
-      //console.log("before send: " + new Date().getTime());
       sendTxn(parseInt(process.argv[2]), parseInt(process.argv[3]));
       timestamp = new Date().getTime();
-      //console.log("after send: " + timestamp);
+      
     }
   }
 )
