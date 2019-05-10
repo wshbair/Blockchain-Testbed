@@ -19,7 +19,7 @@ sites.each do |site|
     rescue  Cute::G5K::EventTimeout
       puts "We waited too long in site #{site} let's release the job and try in another site"
       g5k.release(job)
-    end
+  end
 end
 
 puts "All nodes are reserved"
