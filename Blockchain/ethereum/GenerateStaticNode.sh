@@ -1,9 +1,11 @@
 #!/bin/bash
 # run on the root node to generate static-nodes.json file
-ip_addr=`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
+# old ubuntu 14
+#ip_addr=`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
+ip_addr = `ip -4 addr show eno1 | grep -oP "(?<=inet ).*(?=/)"`
 if [ -z "$ip_addr" ]
  then
-  ip_addr=`ifconfig eth1 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
+  ip_addr = `ip -4 addr show eno2 | grep -oP "(?<=inet ).*(?=/)"`
 fi
 
 # old version of geth
