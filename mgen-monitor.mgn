@@ -1,7 +1,0 @@
-# MGEN script begins here
-# These are some "Transmission Event" script lines
-
-# Monitor some ports for UDP traffic
-0.0 LISTEN UDP 5000-5002,6000,6003
-
-# MGEN script ends here
