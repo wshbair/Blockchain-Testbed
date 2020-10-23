@@ -14,6 +14,6 @@ json=`curl -H "Content-Type: application/json" --silent --data '{"jsonrpc":"2.0"
 prop='result'
 picurl=`jsonval`
 
-json=`curl -H "Content-Type: application/json" --silent --data '{"jsonrpc":"2.0","method":"miner_setEtherbase","params":["'$picurl'", "latest"],"id":1}' localhost:8084`
+json=`curl -H "Content-Type: application/json" --silent --data '{"jsonrpc":"2.0","method":"miner_setEtherbase","params":["'$picurl'"],"id":1}' localhost:8084`
 
 nohup geth --syncmode "full" --allow-insecure-unlock --datadir="/home/luxbch/data" --nodiscover --rpc --rpcport "8084" --rpccorsdomain "*" --rpcapi "admin,eth,debug,miner,net,txpool,personal,web3" --gasprice 0 --maxpeers 32 --networkid 3576 --unlock 0 --password <(echo -n "") --mine --minerthreads 8 2> /dev/null 2>&1 &
