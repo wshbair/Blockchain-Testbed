@@ -20,4 +20,3 @@ sudo apt-get install -y nodejs
 curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.deb.sh | sudo bash
 sudo apt-get install -y restclient-cpp
 sudo apt-get install -y libcurl4-openssl-dev
-sudo apt-get install -y mgen
