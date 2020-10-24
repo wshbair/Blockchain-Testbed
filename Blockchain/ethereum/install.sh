@@ -20,4 +20,15 @@ sudo apt-get install -y nodejs
 curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.deb.sh | sudo bash
 sudo apt-get install -y restclient-cpp
 sudo apt-get install -y libcurl4-openssl-dev
+#install chainhammar
 git clone https://github.com/wshbair/chainhammer.git
+cd chainhammer
+scripts/install.sh nodocker
+
+git reset HEAD hammer/config.py
+git checkout -- hammer/config.py
+head -n 20 hammer/config.py
+
+sed -i "s/RPCaddress='http:\/\/localhost:8545'/RPCaddress='http:\/\/localhost:8084'/g" hammer/config.py
+sed -i "s/RPCaddress2='http:\/\/localhost:8545'/RPCaddress2='http:\/\/localhost:8084'/g" hammer/config.py
+head -n 20 hammer/config.py
