@@ -15,10 +15,10 @@ npm install poisson-process
 npm install solc
 npm install file-system --save
 sudo apt-get install -y curl
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
-curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.deb.sh | sudo bash
-sudo apt-get install -y restclient-cpp
+#curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+#sudo apt-get install -y nodejs
+#curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.deb.sh | sudo bash
+#sudo apt-get install -y restclient-cpp
 sudo apt-get install -y libcurl4-openssl-dev
 #install chainhammar
 git clone https://github.com/wshbair/chainhammer.git
