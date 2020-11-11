@@ -1,24 +1,33 @@
 #!/bin/bash
 # installing ethereum and docker
-sudo apt-get update
-sudo apt-get -y install python-software-properties
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository -y ppa:ethereum/ethereum
-sudo apt-get update
-sudo apt-get install -y ethereum
+# Ubuntu version 
+#sudo apt-get update
+#sudo apt-get -y install python-software-properties
+#sudo apt-get install -y software-properties-common
+#sudo add-apt-repository -y ppa:ethereum/ethereum
+#sudo apt-get update
+#sudo apt-get install -y ethereum
+
+#Debian version 
+GETH_VERSION=v1.9.6
+go get -d -u github.com/ethereum/go-ethereum
+OLDPATH=$(pwd)
+cd $GOPATH/src/github.com/ethereum/go-ethereum/
+git checkout $GETH_VERSION
+cd $OLDPATH
+rm -f $(which geth)
+go clean -r "github.com/ethereum/go-ethereum/cmd/geth"
+go install  "github.com/ethereum/go-ethereum/cmd/geth"
+
+#Utility Tools
 sudo apt-get install -y git
 sudo apt-get install -y python-numpy
 sudo apt-get install -y nano
 sudo apt-get install -y npm
 npm install web3@0.19
-npm install poisson-process
 npm install solc
 npm install file-system --save
 sudo apt-get install -y curl
-#curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-#sudo apt-get install -y nodejs
-#curl -s https://packagecloud.io/install/repositories/mrtazz/restclient-cpp/script.deb.sh | sudo bash
-#sudo apt-get install -y restclient-cpp
 sudo apt-get install -y libcurl4-openssl-dev
 #install chainhammar
 git clone https://github.com/wshbair/chainhammer.git
