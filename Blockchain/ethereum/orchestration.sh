@@ -22,7 +22,7 @@ for host in `cat REMOTEHOST`; do
 filename="nodes.txt"
 while read -r line
 do
-    scp "static-nodes.json" root@$line:/home/luxbch/data
+    scp "static-nodes.json" root@$line:/root/luxbch/data
 done < $filename
 
 for host in `cat $filename`; do
