@@ -25,8 +25,9 @@ git clone https://github.com/ConsenSys/quorum.git
 cd quorum
 make all
 
-echo PATH=$PATH:/root/quorum/build/bin>>~/.bashrc
-source ~/.bashrc
+PATH=$(pwd)/build/bin:$PATH
+source /etc/environment && export PATH
+
 cd ..
 
 #Utility Tools
