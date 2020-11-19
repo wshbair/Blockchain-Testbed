@@ -12,6 +12,5 @@ cp nodekey new-node
 
 bootnode --nodekey=new-node/nodekey --writeaddress > new-node/enode
 enode=`cat new-node/enode`
-echo $enode
 port="@$ip_addr?discport=0&raftport=50000"
 echo $enode$port
