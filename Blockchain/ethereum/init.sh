@@ -1,7 +1,5 @@
 #!/bin/bash
- geth --datadir new-node account new
- bootnode --genkey=nodekey
- cp nodekey new-node
+geth --datadir new-node-1 init genesis.json
 
 
 
