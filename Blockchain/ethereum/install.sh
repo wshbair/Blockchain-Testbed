@@ -28,7 +28,7 @@ export PATH=$(pwd)/build/bin:$PATH
 cd ..
 
 #Utility Tools
-sudo apt-get install -y git
+#sudo apt-get install -y git
 sudo apt-get install -y python-numpy
 sudo apt-get install -y nano
 sudo apt-get install -y npm
