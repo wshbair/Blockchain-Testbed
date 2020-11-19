@@ -6,8 +6,8 @@ if [ -z "$ip_addr" ]
   ip_addr=`ip -4 addr show eno2 | grep -oP "(?<=inet ).*(?=/)"`
 fi
 
-bootnode --nodekey=new-node-1/nodekey --writeaddress > new-node-1/enode
-enode =`cat new-node-1/enod`
+bootnode --nodekey=new-node/nodekey --writeaddress > new-node/enode
+enode =`cat new-node/enod`
 port ="@$ip_addr?discport=0&raftport=50000""
 echo $enode$port
 
