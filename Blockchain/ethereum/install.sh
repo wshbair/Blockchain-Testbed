@@ -9,15 +9,23 @@
 #sudo apt-get install -y ethereum
 
 #Debian version 
-GETH_VERSION=v1.9.6
-go get -d -u github.com/ethereum/go-ethereum
-OLDPATH=$(pwd)
-cd $GOPATH/src/github.com/ethereum/go-ethereum/
-git checkout $GETH_VERSION
-cd $OLDPATH
-rm -f $(which geth)
-go clean -r "github.com/ethereum/go-ethereum/cmd/geth"
-go install  "github.com/ethereum/go-ethereum/cmd/geth"
+#GETH_VERSION=v1.9.6
+#go get -d -u github.com/ethereum/go-ethereum
+#OLDPATH=$(pwd)
+#cd $GOPATH/src/github.com/ethereum/go-ethereum/
+#git checkout $GETH_VERSION
+#cd $OLDPATH
+#rm -f $(which geth)
+#go clean -r "github.com/ethereum/go-ethereum/cmd/geth"
+#go install  "github.com/ethereum/go-ethereum/cmd/geth"
+
+# Install GoQuorum
+sudo apt-get install golang-go -y
+git clone https://github.com/ConsenSys/quorum.git
+cd quorum
+make all
+export PATH=$(pwd)/build/bin:$PATH
+cd ..
 
 #Utility Tools
 sudo apt-get install -y git
