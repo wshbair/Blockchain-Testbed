@@ -24,8 +24,9 @@ sudo apt-get install golang-go -y
 git clone https://github.com/ConsenSys/quorum.git
 cd quorum
 make all
-export PATH=$(pwd)/build/bin:$PATH
-source ~/.bash_profile
+
+echo PATH=$PATH:/root/quorum/build/bin>>~/.bashrc
+source ~/.bashrc
 cd ..
 
 #Utility Tools
