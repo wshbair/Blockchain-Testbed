@@ -25,8 +25,8 @@ git clone https://github.com/ConsenSys/quorum.git
 cd quorum
 make all
 
-PATH=$(pwd)/build/bin:$PATH
-source /etc/environment && export PATH
+#PATH=$(pwd)/build/bin:$PATH
+#source /etc/environment && export PATH
 
 cd ..
 
