@@ -1,5 +1,5 @@
 #!/bin/bash
-geth --datadir new-node-1 init genesis.json
+geth --datadir new-node init genesis.json
 
 
 
