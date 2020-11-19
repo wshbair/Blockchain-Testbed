@@ -5,5 +5,11 @@ if [ -z "$ip_addr" ]
  then
   ip_addr=`ip -4 addr show eno2 | grep -oP "(?<=inet ).*(?=/)"`
 fi
-geth --datadir=/root/luxbch/data --rpc --rpcaddr 0.0.0.0 --rpcport "8084" --rpccorsdomain "*" --gasprice 0 --networkid 3576 js <(echo 'console.log(admin.nodeInfo.enode);') 2>/dev/null |grep enode | perl -pe "s/127\.0\.0\.1/$ip_addr/g" | perl -pe "s/^/\"/; s/\s*$/\"/;"
+
+bootnode --nodekey=new-node-1/nodekey --writeaddress > new-node-1/enode
+enode =`cat new-node-1/enod`
+port ="@$ip_addr?discport=0&raftport=50000""
+echo $enode$port
+
+#geth --datadir=/root/luxbch/data --rpc --rpcaddr 0.0.0.0 --rpcport "8084" --rpccorsdomain "*" --gasprice 0 --networkid 3576 js <(echo 'console.log(admin.nodeInfo.enode);') 2>/dev/null |grep enode | perl -pe "s/127\.0\.0\.1/$ip_addr/g" | perl -pe "s/^/\"/; s/\s*$/\"/;"
  
