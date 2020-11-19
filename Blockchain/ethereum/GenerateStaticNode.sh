@@ -6,7 +6,7 @@ if [ -z "$ip_addr" ]
   ip_addr=`ip -4 addr show eno2 | grep -oP "(?<=inet ).*(?=/)"`
 fi
 
-nohup /root/quorum/build/bin/geth --datadir new-node account new --password <(echo -n "") 2>/dev/null
+nohup /root/quorum/build/bin/geth --datadir new-node account new --password <(echo -n "") >/dev/null 2>&1
 /root/quorum/build/bin/bootnode --genkey=nodekey
 cp nodekey new-node
 
