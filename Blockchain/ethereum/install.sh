@@ -25,6 +25,7 @@ git clone https://github.com/ConsenSys/quorum.git
 cd quorum
 make all
 export PATH=$(pwd)/build/bin:$PATH
+source ~/.bash_profile
 cd ..
 
 #Utility Tools
