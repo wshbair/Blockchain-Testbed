@@ -12,6 +12,5 @@ cp nodekey new-node
 
 /root/quorum/build/bin/bootnode --nodekey=new-node/nodekey --writeaddress > new-node/enode
 enode=`cat new-node/enode`
-ipaddress= "@$ip_addr<?xml version="%s" encoding="%s"?>"
-port=$ipaddress":21000discport=0&raftport=50000"
-echo "enode://$enode$port"
+port="@$ip_addr:21000?discport=0&raftport=50000"
+printf \"enode://$enode$port\"
