@@ -20,8 +20,6 @@
 #go install  "github.com/ethereum/go-ethereum/cmd/geth"
 
 # Install GoQuorum
-wget https://oss.sonatype.org/service/local/repositories/releases/content/net/consensys/quorum/tessera/tessera-app/20.10.0/tessera-app-20.10.0-app.jar
-sudo apt-get install default-jre -y
 sudo apt-get install golang-go -y
 git clone https://github.com/ConsenSys/quorum.git
 cd quorum
@@ -31,6 +29,11 @@ make all
 #source /etc/environment && export PATH
 
 cd ..
+
+#Install Tessera
+wget https://oss.sonatype.org/service/local/repositories/releases/content/net/consensys/quorum/tessera/tessera-app/20.10.0/tessera-app-20.10.0-app.jar
+mv tessera-app-20.10.0-app.jar tessera.jar
+sudo apt-get install default-jre -y
 
 #Utility Tools
 #sudo apt-get install -y git
