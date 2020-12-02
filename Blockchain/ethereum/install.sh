@@ -20,6 +20,7 @@
 #go install  "github.com/ethereum/go-ethereum/cmd/geth"
 
 # Install GoQuorum
+sudo apt-get install default-jre -y
 sudo apt-get install golang-go -y
 git clone https://github.com/ConsenSys/quorum.git
 cd quorum
