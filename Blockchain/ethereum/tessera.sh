@@ -1,3 +1,4 @@
+#!/bin/bash
 mkdir /root/new-node-1t
 cd /root/new-node-1t
 cat <(echo "yes") | java -jar /root/tessera.jar -keygen -filename /root/new-node-1t/new-node-1
