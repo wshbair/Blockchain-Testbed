@@ -1,6 +1,7 @@
 #!/bin/bash
 # run on the root node to generate static-nodes.json file
-ip_addr=`ip -4 addr show eno1 | grep -oP "(?<=inet ).*(?=/)"`
+#ip_addr=`ip -4 addr show eno1 | grep -oP "(?<=inet ).*(?=/)"`
+ip_addr=`hostname -I`
 if [ -z "$ip_addr" ]
  then
   ip_addr=`ip -4 addr show eno2 | grep -oP "(?<=inet ).*(?=/)"`
