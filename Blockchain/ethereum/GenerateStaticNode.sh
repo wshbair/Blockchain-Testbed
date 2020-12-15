@@ -11,4 +11,6 @@ cp nodekey new-node
 
 /root/quorum/build/bin/bootnode --nodekey=new-node/nodekey --writeaddress > new-node/enode
 enode=`cat new-node/enode`
-printf \"enode://$enode@$ip:21000?discport=0&raftport=50000\"
+
+port="@$ip:21000?discport=0&raftport=50000"
+printf \"enode://$enode$port\"
