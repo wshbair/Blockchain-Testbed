@@ -2,7 +2,7 @@
 #!/bin/bash
 # run on the root node to generate static-nodes.json file
 #ip_addr=`ip -4 addr show eno1 | grep -oP "(?<=inet ).*(?=/)"`
-ip_addr=`hostname -I`
+ip_addr=`hostname -i`
 ip=`echo $ip_addr | sed -e 's/^[[:space:]]*//'`
 
 nohup /root/quorum/build/bin/geth --datadir new-node account new --password <(echo -n "") >/dev/null 2>&1
