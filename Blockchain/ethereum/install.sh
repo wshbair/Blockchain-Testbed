@@ -21,7 +21,11 @@
 
 # Install GoQuorum
 sudo apt-get install golang-go -y
-git clone https://github.com/ConsenSys/quorum.git
+#git clone https://github.com/ConsenSys/quorum.git does not work with current setting 27/01
+#Get older version 
+wget https://github.com/ConsenSys/quorum/archive/v2.7.0.tar.gz
+tar -zxvf v2.7.0.tar.gz
+mv quorum-2.7.0 quorum
 cd quorum
 make all
 
