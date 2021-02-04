@@ -18,7 +18,7 @@
 #rm -f $(which geth)
 #go clean -r "github.com/ethereum/go-ethereum/cmd/geth"
 #go install  "github.com/ethereum/go-ethereum/cmd/geth"
-
+sudo apt install gnuplot -y
 # Install GoQuorum
 sudo apt-get install golang-go -y
 #git clone https://github.com/ConsenSys/quorum.git does not work with current setting 27/01
