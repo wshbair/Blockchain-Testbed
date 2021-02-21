@@ -31,10 +31,10 @@
    ],
    "peer": [
        {
-           "url": "http://localhost:9001"
+           "url": "http://petitprince-4.luxembourg.grid5000.fr:9001"
        },
        {
-           "url": "http://localhost:9003"
+           "url": "http://petitprince-16.luxembourg.grid5000.fr:9003"
        }
    ],
    "keys": {
