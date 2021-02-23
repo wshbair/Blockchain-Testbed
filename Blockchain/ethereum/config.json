@@ -1,5 +1,7 @@
 {
    "useWhiteList": false,
+   "bootstrapNode": true,
+   "disablePeerDiscovery": true,
    "jdbc": {
        "username": "sa",
        "password": "",
@@ -13,12 +15,12 @@
            "serverAddress": "http://localhost:9081",
            "communicationType" : "REST"
        },
-       {
-           "app":"Q2T",
-           "enabled": true,
-            "serverAddress":"unix:/root/new-node-1t/tm.ipc",
-           "communicationType" : "REST"
-       },
+       //{
+       //    "app":"Q2T",
+       //    "enabled": true,
+       //     "serverAddress":"unix:/root/new-node-1t/tm.ipc",
+       //    "communicationType" : "REST"
+       //},
        {
            "app":"P2P",
            "enabled": true,
@@ -31,10 +33,10 @@
    ],
    "peer": [
        {
-           "url": "http://petitprince-4.luxembourg.grid5000.fr:9001"
+           "url": "http://petitprince-2.luxembourg.grid5000.fr:9001"
        },
        {
-           "url": "http://petitprince-16.luxembourg.grid5000.fr:9003"
+           "url": "http://petitprince-5.luxembourg.grid5000.fr:9003"
        }
    ],
    "keys": {
